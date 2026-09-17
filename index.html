@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Odovzdanie webu Príbeh nehračiek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Hanken+Grotesk:wght@400;600&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root {
+    --ground:#F6F3F7; --surface:#FFFFFF; --surface-2:#FBF9FC;
+    --ink:#17121C; --ink-2:#4A4152; --muted:#746A7D;
+    --line:#E5DEE9; --line-strong:#CFC5D6;
+    --accent:#B01568; --accent-soft:#FBEAF3; --accent-line:#F2CFE1;
+    --done:#0B7C72; --done-soft:#E3F3F0; --done-line:#B9DFD8;
+    --warn:#93460A;
+    --shadow: 0 1px 2px rgba(23,18,28,.05), 0 8px 24px -16px rgba(23,18,28,.22);
+    --display:'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --body:'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    --mono:'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#121016; --surface:#1A1620; --surface-2:#221D29;
+      --ink:#F4EFF6; --ink-2:#CFC5D6; --muted:#9A8FA4;
+      --line:#2E2735; --line-strong:#453C4E;
+      --accent:#FF56B0; --accent-soft:#341129; --accent-line:#5A1E44;
+      --done:#38D2C1; --done-soft:#0E2B29; --done-line:#1D4C48;
+      --warn:#F0A15A;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#121016; --surface:#1A1620; --surface-2:#221D29;
+    --ink:#F4EFF6; --ink-2:#CFC5D6; --muted:#9A8FA4;
+    --line:#2E2735; --line-strong:#453C4E;
+    --accent:#FF56B0; --accent-soft:#341129; --accent-line:#5A1E44;
+    --done:#38D2C1; --done-soft:#0E2B29; --done-line:#1D4C48;
+    --warn:#F0A15A;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body);
+    font-size: 17px; line-height: 1.62; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 760px; margin: 0 auto; padding-inline: 20px; padding-block: 0 80px; }
+
+  header.hero { padding-block: 48px 32px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 16px; }
+  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(32px, 6.4vw, 48px);
+    line-height: 1.04; letter-spacing: -.028em; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 18.5px; color: var(--ink-2); max-width: 56ch; margin: 0 0 28px; }
+  .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .facts div { background: var(--surface); padding: 14px 16px; }
+  .facts span { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); }
+  .facts b { display: block; font-family: var(--display); font-weight: 700; font-size: 21px;
+    letter-spacing: -.01em; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .facts small { display: block; font-size: 13px; color: var(--muted); margin-top: 1px; }
+  @media (max-width: 480px) { .facts { grid-template-columns: 1fr; } }
+
+  section { padding-block: 44px 4px; }
+  h2 { font-family: var(--mono); font-weight: 400; font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+  .h2-sub { font-family: var(--display); font-weight: 700; font-size: clamp(23px, 4vw, 30px);
+    letter-spacing: -.018em; margin: 0 0 10px; text-wrap: balance; }
+  .intro { color: var(--ink-2); max-width: 60ch; margin: 0 0 22px; font-size: 16.5px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  b, strong { font-weight: 600; }
+  .ui { font-weight: 600; white-space: nowrap; }
+
+  /* steps */
+  .step { border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    margin-bottom: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .step__head { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center;
+    padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .step__n { font-family: var(--mono); font-weight: 700; font-size: 13px; width: 34px; height: 34px;
+    display: grid; place-items: center; border-radius: 9px; background: var(--accent-soft);
+    color: var(--accent); border: 1px solid var(--accent-line); }
+  .step__t { font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: -.01em; margin: 0; }
+  .step__time { font-family: var(--mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; text-align: right; }
+  @media (max-width: 520px) { .step__head { grid-template-columns: auto 1fr; } .step__time { grid-column: 2; text-align: left; } }
+
+  ul.list { list-style: none; margin: 0; padding: 4px 0; }
+  ul.list li { padding: 12px 22px; font-size: 16.5px; }
+  ul.list li + li { border-top: 1px dashed var(--line); }
+  ul.list li.we { background: var(--surface-2); color: var(--ink-2); font-size: 16px; }
+  ul.list small { display: block; font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+  .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 99px; vertical-align: 2px; margin-right: 8px; white-space: nowrap; border: 1px solid; }
+  .tag--you { background: var(--done-soft); color: var(--done); border-color: var(--done-line); }
+  .tag--we { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-line); }
+
+  /* after handover */
+  .duties { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  .duties li { padding: 15px 22px; font-size: 16px; }
+  .duties li + li { border-top: 1px solid var(--line); }
+  .duties small { display: block; font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+  .duties .k { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--warn); display: block; margin-bottom: 2px; }
+
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-family: var(--mono);
+    font-size: 11.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center; }
+  .print { font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: none;
+    border: 1px solid var(--line-strong); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  .print:hover { color: var(--accent); border-color: var(--accent); }
+  .print:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media print { .print { display: none; } body { background: #fff; } .step { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Pre Združenie STORM · pribehnehraciek.sk</p>
+    <h1>Odovzdanie webu Príbeh nehračiek</h1>
+    <p class="lede">Web a doménu presunieme z našich účtov na účty združenia. Technickú prácu urobíme my,
+      od vás potrebujeme pár údajov a niekoľko potvrdení.</p>
+    <div class="facts">
+      <div><span>Váš čas</span><b>~1 hodina</b><small>rozložená do 2 až 3 týždňov</small></div>
+      <div><span>Náklady potom</span><b>~21 € ročne</b><small>za doménu</small></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Postup</h2>
+    <p class="h2-sub">Päť krokov</p>
+    <p class="intro">Pred každým krokom, v ktorom treba niečo potvrdiť, vám napíšeme.</p>
+
+    <div class="step">
+      <div class="step__head">
+        <div class="step__n">1</div>
+        <h3 class="step__t">Pošlite nám údaje</h3>
+        <div class="step__time">~10 min</div>
+      </div>
+      <ul class="list">
+        <li><span class="tag tag--you">Vy</span><b>Login do Websupportu, alebo e-mail</b>
+          <small>Ak už máte účet vo Websupporte, pošlite jeho login. Ak nie, pošlite e-mail a Websupport vám naň pošle odkaz na registráciu. Tam bude doména.</small></li>
+        <li><span class="tag tag--you">Vy</span><b>Používateľské meno na GitHube</b>
+          <small>Bezplatný účet si založte na <span class="ui">github.com</span>. Tam bude uložený web.</small></li>
+        <li><span class="tag tag--you">Vy</span><b>Či chcete merať návštevnosť webu</b></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step__head">
+        <div class="step__n">2</div>
+        <h3 class="step__t">Prevezmete web</h3>
+        <div class="step__time">~5 min</div>
+      </div>
+      <ul class="list">
+        <li class="we"><span class="tag tag--we">My</span>Presunieme web na nový bezplatný hosting. Deň vopred vám napíšeme, ktorý večer prepíname. Vtedy môže byť web krátko nedostupný.</li>
+        <li><span class="tag tag--you">Vy</span><b>Potvrďte prevod v e-maile od GitHubu</b>
+          <small>Odkaz platí 24 hodín. Ak to nestihnete, pošleme ho znova.</small></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step__head">
+        <div class="step__n">3</div>
+        <h3 class="step__t">Prevezmete doménu</h3>
+        <div class="step__time">~20 min</div>
+      </div>
+      <ul class="list">
+        <li class="we"><span class="tag tag--we">My</span>Pošleme vám cez Websupport žiadosť o prevzatie domény pribehnehraciek.sk.</li>
+        <li><span class="tag tag--you">Vy</span><b>Vo Websupporte žiadosť schváľte.</b>
+</li>
+        <li><span class="tag tag--you">Vy</span><b>Zmeňte držiteľa domény na združenie</b> a potvrďte odkaz, ktorý vám príde e-mailom.</li>
+        <li><span class="tag tag--you">Vy</span><b>Zapnite automatické predĺženie domény.</b></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step__head">
+        <div class="step__n">4</div>
+        <h3 class="step__t">Štatistiky, ak meriate</h3>
+        <div class="step__time">~5 min</div>
+      </div>
+      <ul class="list">
+        <li><span class="tag tag--you">Vy</span><b>Prijmite pozvánky od Googlu</b> do Google Tag Managera a Google Analytics.</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step__head">
+        <div class="step__n">5</div>
+        <h3 class="step__t">Hotovo</h3>
+        <div class="step__time">~10 min</div>
+      </div>
+      <ul class="list">
+        <li><span class="tag tag--you">Vy</span><b>Prezrite si web</b> a napíšte nám, ak niečo nefunguje. Chyby nahlásené do dvoch týždňov od prepnutia opravíme.</li>
+        <li><span class="tag tag--you">Vy</span><b>Podpíšte protokol o odovzdaní</b>, ktorý vám pošleme.</li>
+        <li><span class="tag tag--you">Vy</span><b>Odoberte nám prístupy</b> na GitHube, prípadne aj v Google Tag Manageri a Analytics.</li>
+        <li class="we"><span class="tag tag--we">My</span>Pošleme vám zálohu celého webu a zmažeme u seba všetky prístupy.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Po prevzatí</h2>
+    <p class="h2-sub">Na čo myslieť</p>
+    <p class="intro">Web nepotrebuje údržbu ani aktualizácie.</p>
+    <ul class="duties">
+      <li><span class="k">Každý rok do 8. júna</span><b>Predĺžiť doménu</b>
+        <small>Ak doménu nepredĺžite, web prestane fungovať.</small></li>
+      <li><span class="k">Nikdy</span><b>Nemazať repozitár na GitHube a neprepínať ho na súkromný</b>
+        <small>Web beží priamo z neho.</small></li>
+      <li><span class="k">Vo Websupporte</span><b>Nemeniť DNS záznamy</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Pripravil PS:Digital</span>
+  </footer>
+</div>
+
+</body>
+</html>
